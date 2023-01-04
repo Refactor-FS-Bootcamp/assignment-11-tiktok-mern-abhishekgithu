@@ -7,13 +7,13 @@ import Videos from "./dbModel.js";
 const app = express();
 const port = process.env.PORT || 9000;
 const connection_url =
-    "mongodb+srv://adminn:abhiduke@cluster0.u7s9ghm.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin@cluster0.sgwe1l4.mongodb.net/?retryWrites=true&w=majority";
 
 // middlewares
 app.use(express.json())
 app.use(Cors())
 
-// DB config
+// // DB config
 mongoose.connect(connection_url, err => {
     if(err) throw err;
     console.log('connected to MongoDB')
@@ -22,7 +22,7 @@ mongoose.connect(connection_url, err => {
 // api endpoints
 
 app.get("/", (req, res) =>
-    res.status(200).send("TikTok mern clone -- TheWebDev")
+  res.status(200).send("TikTok mern clone -- TheWebDev")
 );
 
 app.post("/v2/posts", (req, res) => {
@@ -32,13 +32,12 @@ app.post("/v2/posts", (req, res) => {
         else res.status(201).send(data);
     });
 });
-
 app.get("/v2/posts", (req, res) => {
     Videos.find((err, data) => {
         if (err) 
         res.status(500).send(err);
         else 
-        res.status(201).send(data);
+        res.status(200).send(data);
     });
 });
 

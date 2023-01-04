@@ -19,11 +19,4 @@ html {
   scroll-snap-type: y mandatory;
 }
 
-.app_vedios::-webkit-scrollbar {
-  display: none;
-}
 
-.app__vedios {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}

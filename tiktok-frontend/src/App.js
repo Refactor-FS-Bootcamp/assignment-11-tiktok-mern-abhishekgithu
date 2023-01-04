@@ -1,32 +1,42 @@
 import "./App.css";
 import Video from "./components/Video";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get("http://localhost:9000/v2/posts");
+      setVideos(res.data);
+      return res;
+    }
+    fetchData();
+  }, []);
+
+  console.log(videos);
+
   return (
     //BEM
     <div className="app">
       <div className="app__videos">
-        <Video
-          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-          channel="raunak.kumar.4"
-          description="ok working"
-          song="the game of thrones"
-          likes={111}
-          messages={222}
-          shares={333}
-        />
-        <Video
-          url="https://res.cloudinary.com/dxkxvfo2o/video/upload/v1608169738/video1_cvrjfm.mp4"
-          channel="raunak.kumar.4"
-          description="ok working"
-          song="the game of thrones"
-          likes={391}
-          messages={372}
-          shares={133}
-        />
+        {videos.map(
+          ({ url, channel, description, song, likes, shares, messages }) => (
+            <Video
+              key={url}
+              url={url}
+              channel={channel}
+              description={description}
+              song={song}
+              likes={likes}
+              shares={shares}
+              messages={messages}
+            />
+          ))}
       </div>
     </div>
   );
-};
+}
 
 export default App;
